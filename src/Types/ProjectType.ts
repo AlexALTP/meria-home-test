@@ -1,4 +1,4 @@
-import {Usertype} from './UserType';
+import {Usertype} from '@app/Types/UserType';
 
 export type ProjectType = {
   id: number;

@@ -2,13 +2,14 @@ import React from 'react';
 import {Usertype} from '../Types/UserType';
 import styled from 'styled-components';
 import {Image, Text, View} from 'react-native';
+import {Button} from './Button';
 
 type UserCardPropsType = {
   user: Usertype;
+  action: () => void;
 };
 
-export function UserCard({user}: UserCardPropsType) {
-  console.log(user);
+export function UserCard({user, action}: UserCardPropsType) {
   return (
     <Wrapper>
       <PictureWrapper>
@@ -18,6 +19,9 @@ export function UserCard({user}: UserCardPropsType) {
         <Text>{user.firstName}</Text>
         <Text>{user.lastName}</Text>
       </InfoWrapper>
+      <ButtonWrapper>
+        <Button label='Remove' action={action} />
+      </ButtonWrapper>
     </Wrapper>
   );
 }
@@ -45,7 +49,13 @@ const StyledImage = styled(Image)`
 `;
 
 const InfoWrapper = styled(View)`
-  width: 70%;
+  width: 40%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ButtonWrapper = styled(View)`
+  width: 30%;
   align-items: center;
   justify-content: center;
 `;

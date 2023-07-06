@@ -1,10 +1,9 @@
-import type {PayloadAction} from '@reduxjs/toolkit';
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from './store';
 import {STATUS_TYPE} from '../utils/requestStatusType';
 import {ProjectType} from '../Types/ProjectType';
 
-interface ProjectsStateType {
+type ProjectsStateType = {
   isLoading: boolean;
   projectsList: ProjectType[];
   status?: STATUS_TYPE;

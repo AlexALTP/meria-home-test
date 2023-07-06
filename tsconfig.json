@@ -8,13 +8,23 @@
     "incremental": true,
     "isolatedModules": false,
     "jsx": "react-native",
-    "lib": ["es6", "es2019", "esNext"],
+    "lib": [
+      "es6",
+      "es2019",
+      "esNext"
+    ],
     "moduleResolution": "node",
     "noEmit": true,
     "strict": true,
     "target": "esNext",
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": [
+        "src/*"
+      ]
+    }
   },
   "exclude": [
     "node_modules",
