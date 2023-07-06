@@ -2,6 +2,12 @@
   "name": "meria-home-test",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
+  "expo": {
+    "jsEngine": "hermes",
+    "ios": {
+      "jsEngine": "jsc"
+    }
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -9,13 +15,35 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/react-redux": "^7.1.25",
+    "@typescript-eslint/parser": "^5.61.0",
     "expo": "~48.0.18",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
-    "react-native": "0.71.8"
+    "react-native": "0.71.8",
+    "react-native-safe-area-context": "4.5.0",
+    "react-redux": "^8.1.1",
+    "redux-saga": "^1.2.3",
+    "styled-components": "^6.0.2",
+    "typescript": "^4.9.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "eslint": "^8.44.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "3.5.5",
+    "eslint-plugin-functional": "5.0.8",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-native": "4.0.0",
+    "miragejs": "^0.1.47",
+    "prettier": "^3.0.0"
   },
   "private": true
 }
