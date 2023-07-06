@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Modal, Pressable, Text, TextInput, View} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {Modal, Pressable, ScrollView, Text, TextInput, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import styled from 'styled-components';
 
@@ -11,6 +11,8 @@ import {Button} from '../Button';
 import {createProject, updateProject} from '../../Reducer/projectsSlice';
 import {UserCard} from '../UserCard';
 import {MODAL_TYPE} from '../../utils/enums';
+import {usersListSelector} from './../../Reducer/userSlice';
+import {Usertype} from '@app/Types/UserType';
 
 type ProjectModalPropsType = {
   isVisible: boolean;
@@ -23,11 +25,16 @@ export function ProjectModal({isVisible, onClose, type, project}: ProjectModalPr
   const [title, onChangeTitle] = useState(((project != null) && type === MODAL_TYPE.UPDATE) ? project.name : '');
   const [description, onChangeDescription] = useState(((project != null) && type === MODAL_TYPE.UPDATE) ? project.description : '');
   const dispatch = useDispatch();
+  const users = useSelector(usersListSelector);
   const [updatedUserList, setUpdatedUserList] = useState(project?.ownersList ?? []);
 
   const removeAction = (id: number) => {
     const tmp = updatedUserList.filter(item => item.id !== id);
     setUpdatedUserList([...tmp]);
+  };
+
+  const addAction = (user: Usertype) => {
+    setUpdatedUserList([...updatedUserList, user]);
   };
 
   return (
@@ -43,18 +50,27 @@ export function ProjectModal({isVisible, onClose, type, project}: ProjectModalPr
           <StyledTextInput placeholder='Project title' onChangeText={onChangeTitle} value={title} />
           <StyledTextInput placeholder='Project description' onChangeText={onChangeDescription} value={description} />
         </InputWrapper>
-        {updatedUserList.map(user => (
-          <UserCard key={user.id} user={user} action={() => removeAction(user.id)} />
-        ))}
-        <Button
-          label={type === MODAL_TYPE.UPDATE ? 'Update' : 'Create'}
-          action={type === MODAL_TYPE.UPDATE ? () => dispatch(updateProject({
-            id: project!.id,
-            description,
-            title,
-            ownersList: updatedUserList,
-          })) : () => dispatch(createProject({description, title, ownersList: updatedUserList}))}
-          isDisable={!title || !description} />
+        <ScrollView>
+          {updatedUserList.map(user => (
+            <UserCard key={user.id} user={user} actionLabel='Delete' action={() => removeAction(user.id)} />
+          ))}
+          <Separator />
+          {users.map(user => !updatedUserList.find(item => item.id === user.id) ?
+            <UserCard
+              key={user.id}
+              user={user}
+              actionLabel='Add'
+              action={() => addAction(user)} /> : null)}
+          <Button
+            label={type === MODAL_TYPE.UPDATE ? 'Update' : 'Create'}
+            action={type === MODAL_TYPE.UPDATE ? () => dispatch(updateProject({
+              id: project!.id,
+              description,
+              title,
+              ownersList: updatedUserList,
+            })) : () => dispatch(createProject({description, title, ownersList: updatedUserList}))}
+            isDisable={!title || !description} />
+        </ScrollView>
       </Wrapper>
     </Modal>
   );
@@ -63,9 +79,15 @@ export function ProjectModal({isVisible, onClose, type, project}: ProjectModalPr
 const Wrapper = styled(View)`
   display: flex;
   width: 80%;
-  height: 50%;
+  height: 85%;
   align-self: center;
   margin-top: 20%;
+`;
+
+const Separator = styled(View)`
+  width: 100%;
+  height: 1px;
+  background-color: black;
 `;
 
 const HeaderWrapper = styled(View)`

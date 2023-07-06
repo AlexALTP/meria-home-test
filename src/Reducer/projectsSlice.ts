@@ -20,45 +20,46 @@ export const ProjectsSlice = createSlice({
   initialState,
   reducers: {
     // -------- Request projects list --------
-    requestProjects: (state) => {
+    requestProjects: (state: ProjectsStateType) => {
       state.isLoading = true;
       state.status = STATUS_TYPE.LOADING;
     },
-    requestProjectsSuccess: (state, {payload}) => {
+    requestProjectsSuccess: (state: ProjectsStateType, {payload}) => {
       state.isLoading = false;
       state.status = STATUS_TYPE.SUCCESS;
       state.projectsList = [...payload];
     },
-    requestProjectsError: (state) => {
+    requestProjectsError: (state: ProjectsStateType) => {
       state.isLoading = false;
       state.status = STATUS_TYPE.ERROR;
     },
 
     // -------- Remove project --------
-    removeProject: (state) => {
+    removeProject: (state: ProjectsStateType) => {
       state.isLoading = true;
       state.status = STATUS_TYPE.LOADING;
     },
-    removeProjectSuccess: (state, {payload: {id}}: PayloadAction<{id: number}>) => {
+    removeProjectSuccess: (state: ProjectsStateType, {payload: {id}}: PayloadAction<{id: number}>) => {
       const updatedArray = state.projectsList.filter(project => project.id !== id);
       state.isLoading = false;
       state.status = STATUS_TYPE.SUCCESS;
       state.projectsList = [...updatedArray];
     },
-    removeProjectError: (state) => {
+    removeProjectError: (state: ProjectsStateType) => {
       state.isLoading = false;
       state.status = STATUS_TYPE.ERROR;
     },
+
     // -------- Update project --------
-    updateProject: (state) => {
+    updateProject: (state: ProjectsStateType) => {
       state.isLoading = true;
       state.status = STATUS_TYPE.LOADING;
     },
-    updateError: (state) => {
+    updateError: (state: ProjectsStateType) => {
       state.isLoading = false;
       state.status = STATUS_TYPE.ERROR;
     },
-    updateSuccess: (state, {
+    updateSuccess: (state: ProjectsStateType, {
       payload: {
         id,
         description,
@@ -79,16 +80,17 @@ export const ProjectsSlice = createSlice({
       state.status = STATUS_TYPE.SUCCESS;
       state.projectsList = newList;
     },
+
     // -------- Create project --------
-    createProject: (state) => {
+    createProject: (state: ProjectsStateType) => {
       state.isLoading = true;
       state.status = STATUS_TYPE.LOADING;
     },
-    createProjectError: (state) => {
+    createProjectError: (state: ProjectsStateType) => {
       state.isLoading = false;
       state.status = STATUS_TYPE.ERROR;
     },
-    createProjectSuccess: (state, {
+    createProjectSuccess: (state: ProjectsStateType, {
       payload: {
         description,
         title,

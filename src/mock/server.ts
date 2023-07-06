@@ -4,26 +4,7 @@ export function makeServer({environment = 'test'}) {
   return createServer({
     environment,
     routes() {
-      this.get('/api/users', () => [
-        {
-          id: 1,
-          firstName: 'user1',
-          lastName: 'toto',
-          picture: 'https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?w=2000',
-        },
-        {
-          id: 2,
-          firstName: 'user2',
-          lastName: 'toto',
-          picture: 'https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?w=2000',
-        },
-        {
-          id: 3,
-          firstName: 'user3',
-          lastName: 'toto',
-          picture: 'https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?w=2000',
-        },
-      ]);
+      // -------- projects mocks --------
       this.get('/api/projects', () => [
         {
           id: 1,
@@ -62,15 +43,33 @@ export function makeServer({environment = 'test'}) {
           }],
         },
       ]);
-      this.post('/api/newProject', () => {
-        return 'ok';
-      });
-      this.patch('/api/project/:id', () => {
-        return 'ok';
-      });
-      this.delete('/api/project/:id', () => {
-        return 'ok';
-      });
+      this.post('/api/newProject', () => 'ok');
+      this.patch('/api/project/:id', () => 'ok');
+      this.delete('/api/project/:id', () => 'ok');
+      // -------- user mocks --------
+      this.get('/api/users', () => [
+        {
+          id: 1,
+          firstName: 'user1',
+          lastName: 'toto',
+          picture: 'https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?w=2000',
+        },
+        {
+          id: 2,
+          firstName: 'user2',
+          lastName: 'toto',
+          picture: 'https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?w=2000',
+        },
+        {
+          id: 3,
+          firstName: 'user3',
+          lastName: 'toto',
+          picture: 'https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?w=2000',
+        },
+      ]);
+      this.delete('/api/users/:id', () => 'ok');
+      this.post('/api/newUser', () => 'ok');
+      this.patch('/api/user/:id', () => 'ok');
     },
   });
 }

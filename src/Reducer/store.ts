@@ -1,7 +1,8 @@
 import {configureStore} from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import {ProjectsSlice} from "./projectsSlice";
-import rootSaga from "../Saga/RootSaga";
+import {ProjectsSlice} from './projectsSlice';
+import rootSaga from '../Saga/RootSaga';
+import {UserSlice} from './userSlice';
 
 /* ------------- Saga Middleware ------------- */
 const sagaMiddleware = createSagaMiddleware();
@@ -9,7 +10,7 @@ const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
   reducer: {
     projects: ProjectsSlice.reducer,
-    //users: usersReducer,
+    users: UserSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });

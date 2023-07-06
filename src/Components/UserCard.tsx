@@ -7,9 +7,12 @@ import {Button} from './Button';
 type UserCardPropsType = {
   user: Usertype;
   action: () => void;
+  actionLabel: string;
+  secondAction?: () => void;
+  secondActionLabel?: string;
 };
 
-export function UserCard({user, action}: UserCardPropsType) {
+export function UserCard({user, action, secondAction, actionLabel, secondActionLabel}: UserCardPropsType) {
   return (
     <Wrapper>
       <PictureWrapper>
@@ -20,7 +23,8 @@ export function UserCard({user, action}: UserCardPropsType) {
         <Text>{user.lastName}</Text>
       </InfoWrapper>
       <ButtonWrapper>
-        <Button label='Remove' action={action} />
+        <Button label={actionLabel} action={action} />
+        {secondAction && <Button label={secondActionLabel ?? ''} action={secondAction} />}
       </ButtonWrapper>
     </Wrapper>
   );
@@ -33,6 +37,7 @@ const Wrapper = styled(View)`
   flex-direction: row;
   border: 1px solid grey;
   border-radius: 10px;
+  background-color: white;
 `;
 
 const PictureWrapper = styled(View)`
