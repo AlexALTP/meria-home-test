@@ -1,5 +1,5 @@
 {
-  "extends": "expo/tsconfig.base",
+  "extends": "./tsconfig.paths.json",
   "rootDir": "./src",
   "compilerOptions": {
     "allowJs": true,
@@ -7,24 +7,17 @@
     "esModuleInterop": true,
     "incremental": true,
     "isolatedModules": false,
-    "jsx": "react-native",
+    "jsx": "react",
     "lib": [
       "es6",
-      "es2019",
-      "esNext"
+      "es2019"
     ],
     "moduleResolution": "node",
     "noEmit": true,
     "strict": true,
-    "target": "esNext",
+    "target": "es2018",
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@app/*": [
-        "src/*"
-      ]
-    }
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules",

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "Components/*": [
+        "src/Components/*"
+      ],
+      "Reducers/*": [
+        "src/Reducer/*"
+      ],
+      "Sagas/*": [
+        "src/Saga/*"
+      ],
+      "Utils/*": [
+        "src/utils/*"
+      ],
+      "Views/*": [
+        "src/Views/*"
+      ]
+    }
+  }
+}

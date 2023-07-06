@@ -1,7 +1,8 @@
-import {STATUS_TYPE} from '../utils/requestStatusType';
-import {Usertype} from '@app/Types/UserType';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {RootState} from '@app/Reducer/store';
+
+import {RootState} from './store';
+import {STATUS_TYPE} from '../utils/requestStatusType';
+import {Usertype} from '../Types/UserType';
 
 type UserStateSliceType = {
   isLoading: boolean;

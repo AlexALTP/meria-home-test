@@ -1,5 +1,6 @@
 import {call, put} from 'redux-saga/effects';
 import {PayloadAction} from '@reduxjs/toolkit';
+
 import {
   createUserError,
   createUserSuccess,
@@ -9,7 +10,7 @@ import {
   requestUsersSuccess,
   updateUserError,
   updateUserSuccess,
-} from './../Reducer/userSlice';
+} from "../Reducer/userSlice";
 
 export function* requestUsers() {
   const fetchUsers = async () => await fetch('/api/users');
