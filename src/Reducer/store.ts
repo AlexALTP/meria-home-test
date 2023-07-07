@@ -1,8 +1,9 @@
 import {configureStore} from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import {ProjectsSlice} from './projectsSlice';
-import rootSaga from '../Saga/RootSaga';
-import {UserSlice} from './userSlice';
+
+import {ProjectsSlice} from 'src/Reducer/projectsSlice';
+import {UserSlice} from 'src/Reducer/userSlice';
+import rootSaga from 'src/Saga/RootSaga';
 
 /* ------------- Saga Middleware ------------- */
 const sagaMiddleware = createSagaMiddleware();

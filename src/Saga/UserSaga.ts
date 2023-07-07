@@ -10,10 +10,10 @@ import {
   requestUsersSuccess,
   updateUserError,
   updateUserSuccess,
-} from "../Reducer/userSlice";
+} from 'src/Reducer/userSlice';
 
 export function* requestUsers() {
-  const fetchUsers = async () => await fetch('/api/users');
+  const fetchUsers = async () => fetch('/api/users');
   const response = yield call(fetchUsers);
 
   if (response.ok) {
@@ -29,7 +29,7 @@ export function* createUser({payload}: PayloadAction<{firstName: string; lastNam
     lastName: payload.lastName,
   };
 
-  const createUserApi = async () => await fetch('/api/newUser', {method: 'POST', body: JSON.stringify(user)});
+  const createUserApi = async () => fetch('/api/newUser', {method: 'POST', body: JSON.stringify(user)});
   const response: Response = yield call(createUserApi);
   if (response.ok) {
     yield put(createUserSuccess({...user}));
@@ -39,7 +39,7 @@ export function* createUser({payload}: PayloadAction<{firstName: string; lastNam
 }
 
 export function* removeUser({payload}: PayloadAction<{id: number}>) {
-  const removeUserApi = async () => await fetch(`/api/users/${payload.id}`, {method: 'DELETE'});
+  const removeUserApi = async () => fetch(`/api/users/${payload.id}`, {method: 'DELETE'});
   const response: Response = yield call(removeUserApi);
 
   if (response.ok) {
@@ -56,7 +56,7 @@ export function* updateUser({payload}: PayloadAction<{id: number; firstName: str
     lastName: payload.lastName,
   };
 
-  const updateUserApi = async () => await fetch(`/api/user/${payload.id}`, {
+  const updateUserApi = async () => fetch(`/api/user/${payload.id}`, {
     method: 'PATCH',
     body: JSON.stringify(user),
   });

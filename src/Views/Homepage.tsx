@@ -3,25 +3,28 @@ import {Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import {UserModal} from '../Components/Modals/UserModal';
-import {UserCard} from '../Components/UserCard';
-import {projectsListSelector, requestProjects} from '../Reducer/projectsSlice';
-import {ProjectCard} from '../Components/ProjectCard';
-import {Button} from '../Components/Button';
-import {ProjectModal} from '../Components/Modals/ProjectModal';
-import {MODAL_TYPE} from '../utils/enums';
-import {removeUser, requestUsers, usersListSelector} from '../Reducer/userSlice';
+
+import {UserModal} from 'src/Components/Modals/UserModal';
+import {ProjectModal} from 'src/Components/Modals/ProjectModal';
+import {UserCard} from 'src/Components/UserCard';
+import {ProjectCard} from 'src/Components/ProjectCard';
+import {Button} from 'src/Components/Button';
+import {projectsListSelector, requestProjects} from 'src/Reducer/projectsSlice';
+import {MODAL_TYPE} from 'src/utils/enums';
+import {removeUser, requestUsers, usersListSelector} from 'src/Reducer/userSlice';
+import {ProjectType} from 'src/Types/ProjectType';
+import {Usertype} from 'src/Types/UserType';
 
 export default function Homepage() {
   const dispatch = useDispatch();
   const projects = useSelector(projectsListSelector);
   const users = useSelector(usersListSelector);
-  const [isProjectModalDisplayed, setProjectModalDisplayed] = useState({
+  const [isProjectModalDisplayed, setProjectModalDisplayed]: {displayed: boolean; type: MODAL_TYPE; project: ProjectType | null} = useState({
     displayed: false,
     type: MODAL_TYPE.CREATION,
     project: projects[0] ?? null,
   });
-  const [isUserModalDisplayed, setUserModalDisplayed] = useState({
+  const [isUserModalDisplayed, setUserModalDisplayed]: {displayed: boolean; type: MODAL_TYPE; user: Usertype | null} = useState({
     displayed: false,
     type: MODAL_TYPE.CREATION,
     user: users[0] ?? null,
@@ -50,7 +53,7 @@ export default function Homepage() {
           }}
         />
       ))}
-      {isProjectModalDisplayed.displayed ?
+      {isProjectModalDisplayed.displayed ? (
         <ProjectModal
           type={isProjectModalDisplayed.type}
           isVisible={isProjectModalDisplayed.displayed}
@@ -58,8 +61,9 @@ export default function Homepage() {
             setProjectModalDisplayed({displayed: false, type: MODAL_TYPE.CREATION, project: null});
           }}
           project={isProjectModalDisplayed?.project}
-        /> : null}
-      {isUserModalDisplayed ?
+        />
+      ) : null}
+      {isUserModalDisplayed ? (
         <UserModal
           isVisible={isUserModalDisplayed.displayed}
           onClose={() => setUserModalDisplayed({
@@ -67,7 +71,8 @@ export default function Homepage() {
             type: MODAL_TYPE.CREATION,
             user: null,
           })} type={isUserModalDisplayed.type}
-          user={isUserModalDisplayed.user} /> : null}
+          user={isUserModalDisplayed.user} />
+      ) : null}
       <Button
         label='New project'
         action={() => {
@@ -77,15 +82,16 @@ export default function Homepage() {
         LeftIcon={<MaterialIcons name='add' color='#fff' size={22} />}
       />
       <Text>User list</Text>
-      {users.map(user =>
-        <UserCard
-          key={user.id}
-          user={user}
-          actionLabel='Delete'
-          action={() => dispatch(removeUser({id: user.id}))}
-          secondAction={() => setUserModalDisplayed({displayed: true, type: MODAL_TYPE.UPDATE, user})}
-          secondActionLabel='Update'
-        />,
+      {users.map(user => (
+          <UserCard
+            key={user.id}
+            user={user}
+            actionLabel='Delete'
+            action={() => dispatch(removeUser({id: user.id}))}
+            secondAction={() => setUserModalDisplayed({displayed: true, type: MODAL_TYPE.UPDATE, user})}
+            secondActionLabel='Update'
+          />
+        ),
       )}
       <Button
         label='New user'

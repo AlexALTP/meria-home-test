@@ -1,8 +1,9 @@
 import React from 'react';
-import {Usertype} from '../Types/UserType';
 import styled from 'styled-components';
 import {Image, Text, View} from 'react-native';
-import {Button} from './Button';
+
+import {Usertype} from 'src/Types/UserType';
+import {Button} from 'src/Components/Button';
 
 type UserCardPropsType = {
   user: Usertype;

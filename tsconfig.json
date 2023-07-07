@@ -2,6 +2,12 @@
   "extends": "./tsconfig.paths.json",
   "rootDir": "./src",
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "src/*": [
+        "*"
+      ]
+    },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

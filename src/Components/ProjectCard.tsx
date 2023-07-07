@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Image, Text, View} from 'react-native';
-import {ProjectType} from '../Types/ProjectType';
 import {useDispatch} from 'react-redux';
-import {removeProject} from '../Reducer/projectsSlice';
-import {Button} from './Button';
+
+import {ProjectType} from 'src/Types/ProjectType';
+import {removeProject} from 'src/Reducer/projectsSlice';
+import {Button} from 'src/Components/Button';
 
 type ProjectCardPropsType = {
   project: ProjectType;

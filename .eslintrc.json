@@ -415,7 +415,9 @@
       "node": {
         "extensions": [
           ".js",
-          ".ts"
+          ".jsx",
+          ".ts",
+          ".tsx"
         ]
       },
       "typescript": {

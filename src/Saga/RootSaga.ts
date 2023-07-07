@@ -1,8 +1,9 @@
 import {all, takeEvery, takeLatest} from 'redux-saga/effects';
-import {UserSlice} from '../Reducer/userSlice';
-import {createUser, removeUser, requestUsers, updateUser} from './UserSaga';
-import {ProjectsSlice} from '../Reducer/projectsSlice';
-import {createProject, removeProject, requestProjects, updateProject} from './ProjectSaga';
+
+import {UserSlice} from 'src/Reducer/userSlice';
+import {createUser, removeUser, requestUsers, updateUser} from 'src/Saga/UserSaga';
+import {ProjectsSlice} from 'src/Reducer/projectsSlice';
+import {createProject, removeProject, requestProjects, updateProject} from 'src/Saga/ProjectSaga';
 
 export default function* rootSaga() {
   yield all([

@@ -4,15 +4,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import styled from 'styled-components';
 
-import {ProjectType} from '@app/Types/ProjectType';
-
-
-import {Button} from '../Button';
-import {createProject, updateProject} from '../../Reducer/projectsSlice';
-import {UserCard} from '../UserCard';
-import {MODAL_TYPE} from '../../utils/enums';
-import {usersListSelector} from './../../Reducer/userSlice';
-import {Usertype} from '@app/Types/UserType';
+import {Usertype} from 'src/Types/UserType';
+import {ProjectType} from 'src/Types/ProjectType';
+import {createProject, updateProject} from 'src/Reducer/projectsSlice';
+import {Button} from 'src/Components/Button';
+import {UserCard} from 'src/Components/UserCard';
+import {MODAL_TYPE} from 'src/utils/enums';
+import {usersListSelector} from 'src/Reducer/userSlice';
 
 type ProjectModalPropsType = {
   isVisible: boolean;
@@ -55,12 +53,13 @@ export function ProjectModal({isVisible, onClose, type, project}: ProjectModalPr
             <UserCard key={user.id} user={user} actionLabel='Delete' action={() => removeAction(user.id)} />
           ))}
           <Separator />
-          {users.map(user => !updatedUserList.find(item => item.id === user.id) ?
+          {users.map(user => !updatedUserList.find(item => item.id === user.id) ? (
             <UserCard
               key={user.id}
               user={user}
               actionLabel='Add'
-              action={() => addAction(user)} /> : null)}
+              action={() => addAction(user)} />
+          ) : null)}
           <Button
             label={type === MODAL_TYPE.UPDATE ? 'Update' : 'Create'}
             action={type === MODAL_TYPE.UPDATE ? () => dispatch(updateProject({
