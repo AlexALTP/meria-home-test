@@ -11,6 +11,7 @@ import {Button} from 'src/Components/Button';
 import {UserCard} from 'src/Components/UserCard';
 import {MODAL_TYPE} from 'src/utils/enums';
 import {usersListSelector} from 'src/Reducer/userSlice';
+import {AppDispatch} from 'src/Reducer/store';
 
 type ProjectModalPropsType = {
   isVisible: boolean;
@@ -22,7 +23,7 @@ type ProjectModalPropsType = {
 export function ProjectModal({isVisible, onClose, type, project}: ProjectModalPropsType) {
   const [title, onChangeTitle] = useState(((project != null) && type === MODAL_TYPE.UPDATE) ? project.name : '');
   const [description, onChangeDescription] = useState(((project != null) && type === MODAL_TYPE.UPDATE) ? project.description : '');
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const users = useSelector(usersListSelector);
   const [updatedUserList, setUpdatedUserList] = useState(project?.ownersList ?? []);
 

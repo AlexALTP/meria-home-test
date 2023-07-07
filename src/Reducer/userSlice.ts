@@ -36,7 +36,7 @@ export const UserSlice = createSlice({
     },
 
     // -------- Remove user --------
-    removeUser: (state: UserStateSliceType) => {
+    removeUser: (state: UserStateSliceType, _payload) => {
       state.isLoading = true;
       state.status = STATUS_TYPE.LOADING;
     },
@@ -52,7 +52,7 @@ export const UserSlice = createSlice({
     },
 
     // -------- Update user --------
-    updateUser: (state: UserStateSliceType) => {
+    updateUser: (state: UserStateSliceType, _payload) => {
       state.isLoading = true;
       state.status = STATUS_TYPE.LOADING;
     },
@@ -81,7 +81,7 @@ export const UserSlice = createSlice({
     },
 
     // -------- Create user --------
-    createUser: (state: UserStateSliceType) => {
+    createUser: (state: UserStateSliceType, _payload) => {
       state.isLoading = true;
       state.status = STATUS_TYPE.LOADING;
     },

@@ -14,19 +14,18 @@ import {MODAL_TYPE} from 'src/utils/enums';
 import {UserSlice, usersListSelector} from 'src/Reducer/userSlice';
 import {ProjectType} from 'src/Types/ProjectType';
 import {Usertype} from 'src/Types/UserType';
+import {AppDispatch} from 'src/Reducer/store';
 
 export default function Homepage() {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const projects = useSelector(projectsListSelector);
   const users = useSelector(usersListSelector);
-  const [isProjectModalDisplayed, setProjectModalDisplayed]:
-    {displayed: boolean; type: MODAL_TYPE; project: ProjectType | null} = useState({
+  const [isProjectModalDisplayed, setProjectModalDisplayed] = useState<{displayed: boolean; type: MODAL_TYPE; project: ProjectType | null}>({
     displayed: false,
     type: MODAL_TYPE.CREATION,
     project: projects[0] ?? null,
   });
-  const [isUserModalDisplayed, setUserModalDisplayed]:
-    {displayed: boolean; type: MODAL_TYPE; user: Usertype | null} = useState({
+  const [isUserModalDisplayed, setUserModalDisplayed] = useState<{displayed: boolean; type: MODAL_TYPE; user: Usertype | null}>({
     displayed: false,
     type: MODAL_TYPE.CREATION,
     user: users[0] ?? null,

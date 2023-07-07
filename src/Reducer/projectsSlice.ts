@@ -36,7 +36,7 @@ export const ProjectsSlice = createSlice({
     },
 
     // -------- Remove project --------
-    removeProject: (state: ProjectsStateType) => {
+    removeProject: (state: ProjectsStateType, _payload) => {
       state.isLoading = true;
       state.status = STATUS_TYPE.LOADING;
     },
@@ -52,7 +52,7 @@ export const ProjectsSlice = createSlice({
     },
 
     // -------- Update project --------
-    updateProject: (state: ProjectsStateType) => {
+    updateProject: (state: ProjectsStateType, _payload) => {
       state.isLoading = true;
       state.status = STATUS_TYPE.LOADING;
     },
@@ -83,7 +83,7 @@ export const ProjectsSlice = createSlice({
     },
 
     // -------- Create project --------
-    createProject: (state: ProjectsStateType) => {
+    createProject: (state: ProjectsStateType, _payload) => {
       state.isLoading = true;
       state.status = STATUS_TYPE.LOADING;
     },
