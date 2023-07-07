@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import {MODAL_TYPE} from 'src/utils/enums';
 import {Button} from 'src/Components/Button';
 import {Usertype} from 'src/Types/UserType';
-import {createUser, updateUser} from 'src/Saga/UserSaga';
+import {UserSlice} from 'src/Reducer/userSlice';
 
 type UserModalPropsType = {
   isVisible: boolean;
@@ -45,11 +45,11 @@ export function UserModal({isVisible, onClose, type, user}: UserModalPropsType) 
         ))} */}
         <Button
           label={type === MODAL_TYPE.UPDATE ? 'Update' : 'Create'}
-          action={type === MODAL_TYPE.UPDATE ? () => dispatch(updateUser({
+          action={type === MODAL_TYPE.UPDATE ? () => dispatch(UserSlice.actions.updateUser({
             id: user!.id,
             firstName,
             lastName,
-          })) : () => dispatch(createUser({firstName, lastName}))}
+          })) : () => dispatch(UserSlice.actions.createUser({firstName, lastName}))}
           isDisable={!firstName || !lastName} />
       </Wrapper>
     </Modal>

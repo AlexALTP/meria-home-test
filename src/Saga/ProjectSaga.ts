@@ -1,24 +1,16 @@
 import {call, put} from 'redux-saga/effects';
 import {PayloadAction} from '@reduxjs/toolkit';
 
-import {
-  createProjectError,
-  createProjectSuccess,
-  removeProjectError,
-  removeProjectSuccess,
-  requestProjectsSuccess,
-  updateError,
-  updateSuccess,
-} from 'src/Reducer/projectsSlice';
+import {ProjectsSlice} from 'src/Reducer/projectsSlice';
 
 export function* requestProjects() {
   const fetchProjects = async () => fetch('/api/projects');
   const response = yield call(fetchProjects);
 
   if (response.ok) {
-    yield put(requestProjectsSuccess(JSON.parse(response._bodyInit)));
+    yield put(ProjectsSlice.actions.requestProjectsSuccess(JSON.parse(response._bodyInit)));
   } else {
-    yield put(removeProjectError());
+    yield put(ProjectsSlice.actions.removeProjectError());
   }
 }
 
@@ -32,9 +24,9 @@ export function* createProject({payload}: any) {
   const createProjectApi = async () => fetch('/api/newProject', {method: 'POST', body: JSON.stringify(project)});
   const response: Response = yield call(createProjectApi);
   if (response.ok) {
-    yield put(createProjectSuccess({...project}));
+    yield put(ProjectsSlice.actions.createProjectSuccess({...project}));
   } else {
-    yield put(createProjectError());
+    yield put(ProjectsSlice.actions.createProjectError());
   }
 }
 
@@ -43,9 +35,9 @@ export function* removeProject({payload}: PayloadAction<{id: number}>) {
   const response: Response = yield call(removeProjectApi);
 
   if (response.ok) {
-    yield put(removeProjectSuccess({id: payload.id}));
+    yield put(ProjectsSlice.actions.removeProjectSuccess({id: payload.id}));
   } else {
-    yield put(removeProjectError());
+    yield put(ProjectsSlice.actions.removeProjectError());
   }
 }
 
@@ -64,8 +56,8 @@ export function* updateProject({payload}: PayloadAction<{id: number; description
   const response: Response = yield call(updateProjectApi);
 
   if (response.ok) {
-    yield put(updateSuccess({...payload}));
+    yield put(ProjectsSlice.actions.updateSuccess({...payload}));
   } else {
-    yield put(updateError());
+    yield put(ProjectsSlice.actions.updateError());
   }
 }

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import {Usertype} from 'src/Types/UserType';
 import {ProjectType} from 'src/Types/ProjectType';
-import {createProject, updateProject} from 'src/Reducer/projectsSlice';
+import {ProjectsSlice} from 'src/Reducer/projectsSlice';
 import {Button} from 'src/Components/Button';
 import {UserCard} from 'src/Components/UserCard';
 import {MODAL_TYPE} from 'src/utils/enums';
@@ -62,12 +62,16 @@ export function ProjectModal({isVisible, onClose, type, project}: ProjectModalPr
           ) : null)}
           <Button
             label={type === MODAL_TYPE.UPDATE ? 'Update' : 'Create'}
-            action={type === MODAL_TYPE.UPDATE ? () => dispatch(updateProject({
+            action={type === MODAL_TYPE.UPDATE ? () => dispatch(ProjectsSlice.actions.updateProject({
               id: project!.id,
               description,
               title,
               ownersList: updatedUserList,
-            })) : () => dispatch(createProject({description, title, ownersList: updatedUserList}))}
+            })) : () => dispatch(ProjectsSlice.actions.createProject({
+              description,
+              title,
+              ownersList: updatedUserList,
+            }))}
             isDisable={!title || !description} />
         </ScrollView>
       </Wrapper>

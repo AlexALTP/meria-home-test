@@ -1,25 +1,16 @@
 import {call, put} from 'redux-saga/effects';
 import {PayloadAction} from '@reduxjs/toolkit';
 
-import {
-  createUserError,
-  createUserSuccess,
-  removeUserError,
-  removeUserSuccess,
-  requestUsersError,
-  requestUsersSuccess,
-  updateUserError,
-  updateUserSuccess,
-} from 'src/Reducer/userSlice';
+import {UserSlice} from 'src/Reducer/userSlice';
 
 export function* requestUsers() {
   const fetchUsers = async () => fetch('/api/users');
   const response = yield call(fetchUsers);
 
   if (response.ok) {
-    yield put(requestUsersSuccess(JSON.parse(response._bodyInit)));
+    yield put(UserSlice.actions.requestUsersSuccess(JSON.parse(response._bodyInit)));
   } else {
-    yield put(requestUsersError());
+    yield put(UserSlice.actions.requestUsersError());
   }
 }
 
@@ -32,9 +23,9 @@ export function* createUser({payload}: PayloadAction<{firstName: string; lastNam
   const createUserApi = async () => fetch('/api/newUser', {method: 'POST', body: JSON.stringify(user)});
   const response: Response = yield call(createUserApi);
   if (response.ok) {
-    yield put(createUserSuccess({...user}));
+    yield put(UserSlice.actions.createUserSuccess({...user}));
   } else {
-    yield put(createUserError());
+    yield put(UserSlice.actions.createUserError());
   }
 }
 
@@ -43,9 +34,9 @@ export function* removeUser({payload}: PayloadAction<{id: number}>) {
   const response: Response = yield call(removeUserApi);
 
   if (response.ok) {
-    yield put(removeUserSuccess({id: payload.id}));
+    yield put(UserSlice.actions.removeUserSuccess({id: payload.id}));
   } else {
-    yield put(removeUserError());
+    yield put(UserSlice.actions.removeUserError());
   }
 }
 
@@ -63,8 +54,8 @@ export function* updateUser({payload}: PayloadAction<{id: number; firstName: str
   const response: Response = yield call(updateUserApi);
 
   if (response.ok) {
-    yield put(updateUserSuccess({...payload}));
+    yield put(UserSlice.actions.updateUserSuccess({...payload}));
   } else {
-    yield put(updateUserError());
+    yield put(UserSlice.actions.updateUserError());
   }
 }

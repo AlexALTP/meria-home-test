@@ -4,7 +4,7 @@ import {Image, Text, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 
 import {ProjectType} from 'src/Types/ProjectType';
-import {removeProject} from 'src/Reducer/projectsSlice';
+import {ProjectsSlice} from 'src/Reducer/projectsSlice';
 import {Button} from 'src/Components/Button';
 
 type ProjectCardPropsType = {
@@ -22,7 +22,7 @@ export function ProjectCard({project, updateAction}: ProjectCardPropsType) {
         <Text>{project.name}</Text>
         <Text>{project.description}</Text>
       </InfoWrapper>
-      <Button label='Delete' action={() => dispatch(removeProject({id: project.id}))} />
+      <Button label='Delete' action={() => dispatch(ProjectsSlice.actions.removeProject({id: project.id}))} />
       <Button label='Update' action={updateAction} />
     </Wrapper>
   );

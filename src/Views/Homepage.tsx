@@ -9,9 +9,9 @@ import {ProjectModal} from 'src/Components/Modals/ProjectModal';
 import {UserCard} from 'src/Components/UserCard';
 import {ProjectCard} from 'src/Components/ProjectCard';
 import {Button} from 'src/Components/Button';
-import {projectsListSelector, requestProjects} from 'src/Reducer/projectsSlice';
+import {projectsListSelector, ProjectsSlice} from 'src/Reducer/projectsSlice';
 import {MODAL_TYPE} from 'src/utils/enums';
-import {removeUser, requestUsers, usersListSelector} from 'src/Reducer/userSlice';
+import {UserSlice, usersListSelector} from 'src/Reducer/userSlice';
 import {ProjectType} from 'src/Types/ProjectType';
 import {Usertype} from 'src/Types/UserType';
 
@@ -19,20 +19,22 @@ export default function Homepage() {
   const dispatch = useDispatch();
   const projects = useSelector(projectsListSelector);
   const users = useSelector(usersListSelector);
-  const [isProjectModalDisplayed, setProjectModalDisplayed]: {displayed: boolean; type: MODAL_TYPE; project: ProjectType | null} = useState({
+  const [isProjectModalDisplayed, setProjectModalDisplayed]:
+    {displayed: boolean; type: MODAL_TYPE; project: ProjectType | null} = useState({
     displayed: false,
     type: MODAL_TYPE.CREATION,
     project: projects[0] ?? null,
   });
-  const [isUserModalDisplayed, setUserModalDisplayed]: {displayed: boolean; type: MODAL_TYPE; user: Usertype | null} = useState({
+  const [isUserModalDisplayed, setUserModalDisplayed]:
+    {displayed: boolean; type: MODAL_TYPE; user: Usertype | null} = useState({
     displayed: false,
     type: MODAL_TYPE.CREATION,
     user: users[0] ?? null,
   });
 
   useEffect(() => {
-    dispatch(requestProjects());
-    dispatch(requestUsers());
+    dispatch(ProjectsSlice.actions.requestProjects());
+    dispatch(UserSlice.actions.requestUsers());
   }, [dispatch]);
 
   return (
@@ -87,7 +89,7 @@ export default function Homepage() {
             key={user.id}
             user={user}
             actionLabel='Delete'
-            action={() => dispatch(removeUser({id: user.id}))}
+            action={() => dispatch(UserSlice.actions.removeUser({id: user.id}))}
             secondAction={() => setUserModalDisplayed({displayed: true, type: MODAL_TYPE.UPDATE, user})}
             secondActionLabel='Update'
           />
