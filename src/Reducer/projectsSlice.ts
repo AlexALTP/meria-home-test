@@ -117,12 +117,7 @@ export const {
   removeProject,
   removeProjectError,
   removeProjectSuccess,
-  createProject,
   createProjectSuccess,
-  createProjectError,
-  updateError,
-  updateProject,
-  updateSuccess,
 } = ProjectsSlice.actions;
 
 export const isLoadingSelector = (state: RootState) => state.projects.isLoading;
